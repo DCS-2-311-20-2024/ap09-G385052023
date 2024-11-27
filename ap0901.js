@@ -29,33 +29,34 @@ function init() {
 
   //太陽の作成
   const sunGeometry = new THREE.SphereGeometry(3, 16, 16);
-  const sunMaterial = new THREE.MeshBasicMaterial({ color: "red" });
+  const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000 });
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
   scene.add(sun);
 
   //地球の作成
   const earthGeometry = new THREE.SphereGeometry(1, 16, 16);
-  const earthMaterial = new THREE.MeshLambertMaterial({ color: "blue" });
+  const earthMaterial = new THREE.MeshLambertMaterial({ color: 0x00ffff });
   const earth = new THREE.Mesh(earthGeometry, earthMaterial);
   earth.position.set(20, 0, 20);
   scene.add(earth);
 
   // 光源の設定
   const spotLight = new THREE.SpotLight(0xffffff, 1000);
-  spotLight.position.set(10, 1, 10);
+  spotLight.position.set(15, 15, 15);
   spotLight.castShadow = true;
   scene.add(spotLight);
 
   // カメラの作成
   const camera = new THREE.PerspectiveCamera(
     50, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(30, 5, 30);
+  camera.position.set(40, 5, 40);
   camera.lookAt(0, 0, 0);
 
   // レンダラの設定
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, innerHeight);
   renderer.shadowMap.enaled = true;
+  renderer.setClearColor(0x000030);
   document.getElementById("output").appendChild(renderer.domElement);
 
   // カメラ制御
