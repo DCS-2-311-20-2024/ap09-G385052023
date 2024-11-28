@@ -6,6 +6,7 @@
 
 // ライブラリをモジュールとして読み込む
 import * as THREE from "three";
+import { GLTFLoader } from "three/addons";
 import { OrbitControls } from 'three/addons';
 import { GUI } from "ili-gui";
 
@@ -13,11 +14,15 @@ import { GUI } from "ili-gui";
 function init() {
   // 制御変数の定義
   const param = {
+    background: true,
+    birdsEye: false,
     axes: true, // 座標軸
   };
 
   // GUIコントローラの設定
   const gui = new GUI();
+  gui.add(param, "background").name("背景");
+  gui.add(param, "birdsEye").name("俯瞰")
   gui.add(param, "axes").name("座標軸");
 
   // シーン作成
@@ -29,7 +34,7 @@ function init() {
 
   //太陽の作成
   const sunGeometry = new THREE.SphereGeometry(3, 16, 16);
-  const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000 });
+  const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xe60033 });
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
   scene.add(sun);
 
@@ -38,6 +43,7 @@ function init() {
   const earthMaterial = new THREE.MeshLambertMaterial({ color: 0x00ffff });
   const earth = new THREE.Mesh(earthGeometry, earthMaterial);
   earth.position.set(20, 0, 20);
+  earth.receiveShadow = true;
   scene.add(earth);
 
   // 光源の設定
@@ -46,9 +52,12 @@ function init() {
   spotLight.castShadow = true;
   scene.add(spotLight);
 
+  const light2 = new THREE.AmbientLight('white', 0.2);
+  scene.add(light2);
+
   // カメラの作成
   const camera = new THREE.PerspectiveCamera(
-    50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    60, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(40, 5, 40);
   camera.lookAt(0, 0, 0);
 
@@ -60,10 +69,26 @@ function init() {
   document.getElementById("output").appendChild(renderer.domElement);
 
   // カメラ制御
-  const orbitControls
-    = new OrbitControls(camera, renderer.domElement);
+  const orbitControls = new OrbitControls(camera, renderer.domElement);
   orbitControls.listenToKeyEvents(window);
   orbitControls.enableDamping = true;
+
+  // 背景の設定
+  let renderTarget;
+  function setBackground() {
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(
+      "space.png",
+      () => {
+        renderTarget
+          = new THREE.WebGLCubeRenderTarget(texture.image.height);
+        renderTarget.fromEquirectangularTexture(renderer, texture);
+        scene.background = renderTarget.texture;
+        render();
+      }
+    )
+  }
+  setBackground();
 
   // 描画処理
 
@@ -75,6 +100,21 @@ function init() {
     axes.visible = param.axes;
     // カメラ位置の制御
     orbitControls.update();
+
+    //カメラ位置の切り替え
+    if (param.birdsEye) {
+      camera.position.set(0, 100, 0);
+      camera.up.set(0, 1, 0);
+    }
+
+    // 背景の切り替え
+    if (param.background) {
+      scene.background = renderTarget.texture;
+      //plane.visible = false;
+    } else {
+      scene.background = null;
+      //plane.visible = true;
+    }
 
     //自転
     sun.rotation.y = (sun.rotation.y + 0.01) % (2 * Math.PI);
@@ -97,3 +137,5 @@ function init() {
 }
 
 init();
+
+//画像
