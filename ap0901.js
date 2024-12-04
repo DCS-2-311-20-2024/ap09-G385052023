@@ -78,7 +78,7 @@ function init() {
   function setBackground() {
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
-      "space.png",
+      "space.jpeg",
       () => {
         renderTarget
           = new THREE.WebGLCubeRenderTarget(texture.image.height);
@@ -110,10 +110,8 @@ function init() {
     // 背景の切り替え
     if (param.background) {
       scene.background = renderTarget.texture;
-      //plane.visible = false;
     } else {
       scene.background = null;
-      //plane.visible = true;
     }
 
     //自転
