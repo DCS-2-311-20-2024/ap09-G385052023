@@ -13,7 +13,7 @@ import { GUI } from "ili-gui";
 function init() {
   // 制御変数の定義
   const param = {
-    birdsEye: false,
+    birdsEye: false,//俯瞰
     axes: true, // 座標軸
   };
 
@@ -43,9 +43,10 @@ function init() {
   const neptunetex = textureLoader.load("neptunemap.jpg");
 
 
+  //星の作成
   //太陽の作成
   const sunGeometry = new THREE.SphereGeometry(5, 16, 16);
-  const sunMaterial = new THREE.MeshBasicMaterial({ color: 0x550000 });
+  const sunMaterial = new THREE.MeshBasicMaterial({ color: 0x883333 });
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
   sunMaterial.map = suntex;
   scene.add(sun);
@@ -131,7 +132,7 @@ function init() {
   pointLight.castShadow = true;
   scene.add(pointLight);
 
-  const light2 = new THREE.AmbientLight('white', 0.3);
+  const light2 = new THREE.AmbientLight('white', 0.2);
   scene.add(light2);
 
   // カメラの作成
@@ -144,7 +145,7 @@ function init() {
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, innerHeight);
   renderer.shadowMap.enaled = true;
-  renderer.setClearColor(0x000030);
+  renderer.setClearColor(0x222244);
   document.getElementById("output").appendChild(renderer.domElement);
 
   // カメラ制御
@@ -160,7 +161,7 @@ function init() {
   const mercuryradius = 19.5;
   const venusradius = 36;
   const earthradius = 50;
-  const moonradius = 5;
+  const moonradius = 2;
   const marsradius = 76;
   const jupiterradius = 260;
   const saturnradius = 477;
@@ -175,21 +176,21 @@ function init() {
 
     //カメラ位置の切り替え
     if (param.birdsEye) {
-      camera.position.set(0, 1000, 0);
+      camera.position.set(0, 100, 0);
       camera.up.set(0, 1, 0);
     }
 
     //自転
-    sun.rotation.y = (sun.rotation.y + 0.03) % (2 * Math.PI);
-    mercury.rotation.y = (mercury.rotation.y + 0.03) % (2 * Math.PI);
-    venus.rotation.y = (venus.rotation.y + 0.03) % (2 * Math.PI);
-    earth.rotation.y = (earth.rotation.y - 3) % (2 * Math.PI);
+    sun.rotation.y = (sun.rotation.y + 0.09) % (2 * Math.PI);
+    mercury.rotation.y = (mercury.rotation.y + 0.031) % (2 * Math.PI);
+    venus.rotation.y = (venus.rotation.y + 0.00002) % (2 * Math.PI);
+    earth.rotation.y = (earth.rotation.y + 0.05) % (2 * Math.PI);
     moon.rotation.y = (moon.rotation.y + 0.01) % (2 * Math.PI);
-    mars.rotation.y = (mars.rotation.y + 0.03) % (2 * Math.PI);
-    jupiter.rotation.y = (jupiter.rotation.y + 0.03) % (2 * Math.PI);
-    saturn.rotation.y = (saturn.rotation.y + 0.03) % (2 * Math.PI);
-    uranus.rotation.y = (uranus.rotation.y + 0.03) % (2 * Math.PI);
-    neptune.rotation.y = (neptune.rotation.y + 0.03) % (2 * Math.PI);
+    mars.rotation.y = (mars.rotation.y + 0.025) % (2 * Math.PI);
+    jupiter.rotation.y = (jupiter.rotation.y + 0.14) % (2 * Math.PI);
+    saturn.rotation.y = (saturn.rotation.y + 0.10) % (2 * Math.PI);
+    uranus.rotation.y = (uranus.rotation.y + 0.026) % (2 * Math.PI);
+    neptune.rotation.y = (neptune.rotation.y + 0.029) % (2 * Math.PI);
 
     //公転
     mercurytheta = (mercurytheta - 0.0159) % (2 * Math.PI);
