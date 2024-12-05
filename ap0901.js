@@ -43,86 +43,84 @@ function init() {
   const neptunetex = textureLoader.load("neptunemap.jpg");
 
 
-  //星の作成
+  //太陽系の作成
+  const solarSystem = new THREE.Group;
   //太陽の作成
   const sunGeometry = new THREE.SphereGeometry(5, 16, 16);
   const sunMaterial = new THREE.MeshBasicMaterial({ color: 0x883333 });
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
   sunMaterial.map = suntex;
-  scene.add(sun);
+  solarSystem.add(sun);
 
   // //水星の作成
   const mercuryGeometry = new THREE.SphereGeometry(0.3, 16, 16);
   const mercuryMaterial = new THREE.MeshLambertMaterial({});
   const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
-  mercury.receiveShadow = true;
   mercuryMaterial.map = mercurytex;
-  scene.add(mercury);
+  solarSystem.add(mercury);
 
   //金星の作成
   const venusGeometry = new THREE.SphereGeometry(0.95, 16, 16);
   const venusMaterial = new THREE.MeshLambertMaterial({});
   const venus = new THREE.Mesh(venusGeometry, venusMaterial);
-  venus.receiveShadow = true;
   venusMaterial.map = venustex;
-  scene.add(venus);
+  solarSystem.add(venus);
 
 
   //地球の作成
   const earthGeometry = new THREE.SphereGeometry(1, 16, 16);
   const earthMaterial = new THREE.MeshLambertMaterial();
   const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-  earth.receiveShadow = true;
   earthMaterial.map = earthtex;
-  scene.add(earth);
+  solarSystem.add(earth);
 
   //月の作成
   const moonGeometry = new THREE.SphereGeometry(0.3, 16, 16);
   const moonMaterial = new THREE.MeshLambertMaterial();
   const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-  moon.receiveShadow = true;
   moonMaterial.map = moontex;
-  scene.add(moon);
+  solarSystem.add(moon);
 
   //火星の作成
   const marsGeometry = new THREE.SphereGeometry(0.5, 16, 16);
   const marsMaterial = new THREE.MeshLambertMaterial({});
   const mars = new THREE.Mesh(marsGeometry, marsMaterial);
-  mars.receiveShadow = true;
   marsMaterial.map = marstex;
-  scene.add(mars);
+  solarSystem.add(mars);
 
   //木星の作成
   const jupiterGeometry = new THREE.SphereGeometry(10, 16, 16);
   const jupiterMaterial = new THREE.MeshLambertMaterial({});
   const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
-  jupiter.receiveShadow = true;
   jupiterMaterial.map = jupitertex;
-  scene.add(jupiter);
+  solarSystem.add(jupiter);
 
   //土星の作成
   const saturnGeometry = new THREE.SphereGeometry(9, 16, 16);
   const saturnMaterial = new THREE.MeshLambertMaterial({});
   const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
-  saturn.receiveShadow = true;
   saturnMaterial.map = saturntex;
-  scene.add(saturn);
+  solarSystem.add(saturn);
 
   //天王星の作成
   const uranusGeometry = new THREE.SphereGeometry(4, 16, 16);
   const uranusMaterial = new THREE.MeshLambertMaterial({});
   const uranus = new THREE.Mesh(uranusGeometry, uranusMaterial);
-  uranus.receiveShadow = true;
   uranusMaterial.map = uranustex;
-  scene.add(uranus);
+  solarSystem.add(uranus);
 
   //海王星の作成
   const neptuneGeometry = new THREE.SphereGeometry(4, 16, 16);
   const neptuneMaterial = new THREE.MeshLambertMaterial({});
   const neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
-  neptune.receiveShadow = true;
   neptuneMaterial.map = neptunetex;
-  scene.add(neptune);
+  solarSystem.add(neptune);
+
+  solarSystem.children.forEach((child) => {
+    child.castShadow = true;
+    child.receiveShadow = true;
+  });
+  scene.add(solarSystem);
 
 
 
