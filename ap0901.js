@@ -116,6 +116,7 @@ function init() {
   neptuneMaterial.map = neptunetex;
   solarSystem.add(neptune);
 
+  //太陽系の設定
   solarSystem.children.forEach((child) => {
     child.castShadow = true;
     child.receiveShadow = true;
@@ -130,7 +131,7 @@ function init() {
   pointLight.castShadow = true;
   scene.add(pointLight);
 
-  const light2 = new THREE.AmbientLight('white', 0.2);
+  const light2 = new THREE.AmbientLight('white', 0);
   scene.add(light2);
 
   // カメラの作成
@@ -143,7 +144,7 @@ function init() {
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, innerHeight);
   renderer.shadowMap.enaled = true;
-  renderer.setClearColor(0x222244);
+  //renderer.setClearColor(0x222244);
   document.getElementById("output").appendChild(renderer.domElement);
 
   // カメラ制御
