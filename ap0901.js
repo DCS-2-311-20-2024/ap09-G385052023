@@ -46,21 +46,21 @@ function init() {
   //太陽系の作成
   const solarSystem = new THREE.Group;
   //太陽の作成
-  const sunGeometry = new THREE.SphereGeometry(5, 16, 16);
+  const sunGeometry = new THREE.SphereGeometry(3, 64, 64);
   const sunMaterial = new THREE.MeshBasicMaterial({ color: 0x883333 });
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
   sunMaterial.map = suntex;
   solarSystem.add(sun);
 
   // //水星の作成
-  const mercuryGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+  const mercuryGeometry = new THREE.SphereGeometry(0.15, 64, 64);
   const mercuryMaterial = new THREE.MeshLambertMaterial({});
   const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
   mercuryMaterial.map = mercurytex;
   solarSystem.add(mercury);
 
   //金星の作成
-  const venusGeometry = new THREE.SphereGeometry(0.95, 16, 16);
+  const venusGeometry = new THREE.SphereGeometry(0.45, 64, 64);
   const venusMaterial = new THREE.MeshLambertMaterial({});
   const venus = new THREE.Mesh(venusGeometry, venusMaterial);
   venusMaterial.map = venustex;
@@ -68,49 +68,49 @@ function init() {
 
 
   //地球の作成
-  const earthGeometry = new THREE.SphereGeometry(1, 16, 16);
+  const earthGeometry = new THREE.SphereGeometry(0.5, 64, 64);
   const earthMaterial = new THREE.MeshLambertMaterial();
   const earth = new THREE.Mesh(earthGeometry, earthMaterial);
   earthMaterial.map = earthtex;
   solarSystem.add(earth);
 
   //月の作成
-  const moonGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+  const moonGeometry = new THREE.SphereGeometry(0.15, 64, 64);
   const moonMaterial = new THREE.MeshLambertMaterial();
   const moon = new THREE.Mesh(moonGeometry, moonMaterial);
   moonMaterial.map = moontex;
   solarSystem.add(moon);
 
   //火星の作成
-  const marsGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+  const marsGeometry = new THREE.SphereGeometry(0.25, 64, 64);
   const marsMaterial = new THREE.MeshLambertMaterial({});
   const mars = new THREE.Mesh(marsGeometry, marsMaterial);
   marsMaterial.map = marstex;
   solarSystem.add(mars);
 
   //木星の作成
-  const jupiterGeometry = new THREE.SphereGeometry(10, 16, 16);
+  const jupiterGeometry = new THREE.SphereGeometry(5, 64, 64);
   const jupiterMaterial = new THREE.MeshLambertMaterial({});
   const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
   jupiterMaterial.map = jupitertex;
   solarSystem.add(jupiter);
 
   //土星の作成
-  const saturnGeometry = new THREE.SphereGeometry(9, 16, 16);
+  const saturnGeometry = new THREE.SphereGeometry(4.5, 64, 64);
   const saturnMaterial = new THREE.MeshLambertMaterial({});
   const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
   saturnMaterial.map = saturntex;
   solarSystem.add(saturn);
 
   //天王星の作成
-  const uranusGeometry = new THREE.SphereGeometry(4, 16, 16);
+  const uranusGeometry = new THREE.SphereGeometry(2, 64, 64);
   const uranusMaterial = new THREE.MeshLambertMaterial({});
   const uranus = new THREE.Mesh(uranusGeometry, uranusMaterial);
   uranusMaterial.map = uranustex;
   solarSystem.add(uranus);
 
   //海王星の作成
-  const neptuneGeometry = new THREE.SphereGeometry(4, 16, 16);
+  const neptuneGeometry = new THREE.SphereGeometry(2, 64, 64);
   const neptuneMaterial = new THREE.MeshLambertMaterial({});
   const neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
   neptuneMaterial.map = neptunetex;
@@ -137,14 +137,14 @@ function init() {
   // カメラの作成
   const camera = new THREE.PerspectiveCamera(
     60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(60, 10, 60);
+  camera.position.set(40, 10, 40);
   camera.lookAt(0, 0, 0);
 
   // レンダラの設定
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, innerHeight);
   renderer.shadowMap.enaled = true;
-  //renderer.setClearColor(0x222244);
+  renderer.setClearColor(0x222222);
   document.getElementById("output").appendChild(renderer.domElement);
 
   // カメラ制御
@@ -157,15 +157,15 @@ function init() {
     , jupitertheta, saturntheta, uranustheta, neptunetheta;
   earththeta = moontheta = mercurytheta = venustheta = marstheta
     = jupitertheta = saturntheta = uranustheta = neptunetheta = 0;
-  const mercuryradius = 19.5;
-  const venusradius = 36;
-  const earthradius = 50;
-  const moonradius = 2;
-  const marsradius = 76;
-  const jupiterradius = 260;
-  const saturnradius = 477;
-  const uranusradius = 959;
-  const neptuneradius = 1500;
+  const mercuryradius = 11.7;
+  const venusradius = 21.6;
+  const earthradius = 30;
+  const moonradius = 0.5;
+  const marsradius = 45.6;
+  const jupiterradius = 156;
+  const saturnradius = 285;
+  const uranusradius = 577;
+  const neptuneradius = 900;
   // 描画関数
   function render() {
     // 座標軸の表示
